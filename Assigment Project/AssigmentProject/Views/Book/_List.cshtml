@@ -1,0 +1,92 @@
+﻿@model IEnumerable<ViewModel.BookViewModel>
+
+<table class="table">
+    <tr>
+        <th>
+           Category
+        </th>
+        <th>
+           Judul Buku
+        </th>
+        <th>
+           Penulis
+        </th>
+        <th>
+            Lokasi
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategoryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Judul)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pengarang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LokasiRak)
+        </td>
+        <td class="garis">
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownmore"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    More
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownmore">
+                    <li><a class="btn-edit" data-id="@item.Id">Ubah</a></li>
+                    <li><a class="btn-delete" data-id="@item.Id">Hapus</a></li>
+                    <li><a class="btn-detail" data-id="@item.Id">Detail</a></li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+}
+
+</table>
+
+<script type="text/javascript">
+    $(".btn-edit").click(function () {
+        $.ajax({//
+            url: '@Url.Action("Edit", "Book")',
+            type: 'get',
+            data: { id: $(this).attr("data-id") },
+            success: function (result) {
+                $(".modal-title").html("<h4>Edit Daftar Buku</h4>");
+                $(".modal-body").html(result);
+                $(".modal").modal("show");
+            }
+        });
+    });
+
+    $(".btn-delete").click(function () {
+        $.ajax({
+            url: '@Url.Action("Delete", "Book")',
+            type: 'get',
+            data: { id: $(this).attr("data-id") },
+            success: function (result) {
+                $(".modal-title").html("<h4>Delete Daftar Buku</h4>");
+                $(".modal-body").html(result);
+                $(".modal").modal("show");
+            }
+        });
+    });
+
+    $(".btn-detail").click(function () {
+        $.ajax({
+            url: '@Url.Action("Detail", "Book")',
+            type: 'get',
+            data: { id: $(this).attr("data-id") },
+            success: function (result) {
+                $(".modal-title").html("<h4>Details</h4>");
+                $(".modal-body").html(result);
+                $(".modal").modal("show");
+            }
+        });
+    });
+</script>

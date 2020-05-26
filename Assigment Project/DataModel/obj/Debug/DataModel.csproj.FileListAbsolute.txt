@@ -1,0 +1,11 @@
+D:\Assigment Project\DataModel\bin\Debug\DataModel.dll.config
+D:\Assigment Project\DataModel\bin\Debug\DataModel.dll
+D:\Assigment Project\DataModel\bin\Debug\DataModel.pdb
+D:\Assigment Project\DataModel\bin\Debug\EntityFramework.dll
+D:\Assigment Project\DataModel\bin\Debug\EntityFramework.SqlServer.dll
+D:\Assigment Project\DataModel\bin\Debug\EntityFramework.xml
+D:\Assigment Project\DataModel\bin\Debug\EntityFramework.SqlServer.xml
+D:\Assigment Project\DataModel\obj\Debug\DataModel.csprojAssemblyReference.cache
+D:\Assigment Project\DataModel\obj\Debug\DataModel.csproj.CopyComplete
+D:\Assigment Project\DataModel\obj\Debug\DataModel.dll
+D:\Assigment Project\DataModel\obj\Debug\DataModel.pdb

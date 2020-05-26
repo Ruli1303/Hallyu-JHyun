@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "Biodata";
+}
+
+<style>
+    .border {
+        border-bottom: solid 3px;
+    }
+
+    td.garis {
+        border-top-style: groove;
+    }
+</style>
+
+<font face="" color="Blue">
+    <p>
+        <div class="border">
+            <h4>
+                <b>Daftar Anggota</b>
+            </h4>
+        </div>
+    </p>
+
+    <div id="data-list">
+
+    </div>
+
+</font>
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content modal-md">
+            <div class="modal-header bg-primary header-modal-sm">
+                <button type="button" class="close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="title">Modal Tittle</h4>
+            </div>
+            <div class="modal-body" id="body">
+                <p>One fine body&hellip;</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            GetList();
+        });
+
+        function GetList() {
+            $.ajax({
+                url: '@Url.Action("List", "Biodata")',
+                type: 'get',
+                success: function (result) {
+                    $("#data-list").html(result);
+                }
+            });
+        }
+
+    </script>
+    }

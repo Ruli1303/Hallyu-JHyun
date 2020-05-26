@@ -1,0 +1,64 @@
+﻿@model ViewModel.PeminjamanViewModel
+
+@using (Html.BeginForm("Delete", "Peminjaman", FormMethod.Post, new { id = "form-delete", name = "form-delete" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <style type="text/css">
+            .glyphicon-trash {
+                font-size: 50px;
+            }
+        </style>
+
+        <br />
+        <div class="col-md-2 col-md-offset-1">
+            <span class="glyphicon glyphicon-trash"></span>
+        </div>
+        <div>
+            <font color="Red">
+                <h5>Anda Yakin Ingin Menghapus <b>@Html.DisplayFor(model => model.Judul)</b> ?</h5>
+            </font>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-8 col-md-10">
+                <input type="submit" value="Ya" class="btn btn-danger" />
+                <button type="button" class="btn btn-batal btn-warning">Tidak</button>
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+     $(".btn-batal").click(function () {
+        $.ajax({
+            success: function (result) {
+                $(".modal").modal("hide");
+                GetList();
+            }
+        });
+    });
+
+    $("#form-delete").submit(function () {
+        $.ajax({
+            url: this.action,
+            type: this.method,
+            data: $(this).serialize(),
+            success: function (result) {
+                if (result.success) {
+                    alert("Delete Successful! ");
+                     $(".modal").modal("hide");
+                    GetList();
+                }
+                else {
+                    alert("Error! " + result.message);
+                }
+            }
+        });
+        return false;
+    });
+</script>

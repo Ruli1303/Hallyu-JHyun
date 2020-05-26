@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ViewModel.PeminjamanViewModel>
+
+    <style>
+        .border {
+            border-bottom: solid 3px;
+        }
+
+        td.garis {
+            border-top-style: groove;
+        }
+    </style>
+
+    <font face="" color="Blue">
+        <p>
+            <div class="border">
+                <h4>
+                    <b>Daftar Anggota</b>
+                </h4>
+            </div>
+        </p>
+
+        <table class="table">
+            <tr>
+                <th>
+                    NPM
+                </th>
+                <th>
+                    Judul Buku
+                </th>
+                <th>
+                    Tanggal Pinjam
+                </th>
+                <th>
+                    Tanggal Pengembalian
+                </th>
+                <th>
+                    Status
+                </th>
+
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NPM)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Judul)
+                    </td>
+                    <td>
+                        @Convert.ToDateTime(item.TanggalPinjam).ToString("MMMM d, yyyy")
+
+                    </td>
+                    <td>
+                        @Convert.ToDateTime(item.TanggalKembali).ToString("MMMM d, yyyy")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+    </font>

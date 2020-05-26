@@ -1,0 +1,80 @@
+﻿@model ViewModel.PeminjamanViewModel
+
+<font color="blue">
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-6">
+                <div class="row" style="padding-left: 10px">
+                    NPM <br />
+                    <b>@Html.DisplayFor(Model => Model.NPM)</b>
+                </div>
+                <div class="row" style="padding-left: 10px">
+                    Nama <br />
+                    <b>@Html.DisplayFor(model => model.FullName)</b>
+                </div>
+                <div class="row" style="padding-left: 10px">
+                    Tanggal Dipinjam <br />
+                    <b>@Html.DisplayFor(model => model.TanggalPinjam)</b>
+                </div>
+                <div class="row" style="padding-left: 10px">
+                    Tanggal Dikembalikan <br />
+                    <b>@Html.DisplayFor(model => model.TanggalKembali)</b>
+                </div>
+
+            </div>
+
+            <div class="col-sm-6">
+                <div class="row">
+                    Judul <br />
+                    <b>@Html.DisplayFor(model => model.Judul)</b>
+                </div>
+                <div class="row">
+                    Penulis <br />
+                    <b>@Html.DisplayFor(model => model.Penulis)</b>
+                </div>
+                <div class="row">
+                    Penerbit <br />
+                    <b>@Html.DisplayFor(model => model.Penerbit)</b>
+                </div>
+                <div class="row">
+                    Status <br />
+                    <b>@Html.DisplayFor(model => model.Status)</b>
+                </div>
+                <div class="row">
+                    Petugas <br />
+                    <b>@Html.DisplayFor(model => model.Pegawai)</b>
+                </div>
+
+                <div class="row">
+                    <br />
+                </div>
+
+            </div>
+
+            <div class="col-md-12">
+                
+                <div class="row" style="padding-left: 10px">
+                    <button type="button" class="btn btn-close btn-warning">Close</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</font>
+
+<script type="text/javascript">
+    $(".btn-close").click(function () {
+        $.ajax({
+            url: this.action,
+            type: this.method,
+            data: $(this).serialize(),
+            success: function (result) {
+                $(".modal").modal("hide");
+            }
+        });
+    });
+
+</script>
+
+

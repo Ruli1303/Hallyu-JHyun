@@ -1,0 +1,102 @@
+﻿@model IEnumerable<ViewModel.PeminjamanViewModel>
+
+
+<table class="table">
+    <tr>
+        <th>
+            NPM
+        </th>
+        <th>
+            Judul Buku
+        </th>
+        <th>
+            Tanggal Pinjam
+        </th>
+        <th>
+            Tanggal Pengembalian
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NPM)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Judul)
+        </td>
+        <td>
+            @Convert.ToDateTime(item.TanggalPinjam).ToString("MMMM d, yyyy")
+            
+        </td>
+        <td>
+            @Convert.ToDateTime(item.TanggalKembali).ToString("MMMM d, yyyy")
+        </td>
+
+        <td class="garis">
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownmore"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    More
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownmore">
+                    <li><a class="btn-delete" data-id="@item.Id">Hapus</a></li>
+                    <li><a class="btn-detail" data-id="@item.Id">Detail</a></li>
+                    <li><a class="btn-kembalikan" id="SubmitButton" name="SubmitButton" data-value="Dikembalikan" data-id="@item.Id">Pengembalian</a></li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+}
+
+</table>
+
+
+<script type="text/javascript">
+
+    $(".btn-delete").click(function () {
+        $.ajax({
+            url: '@Url.Action("Delete", "Peminjaman")',
+            type: 'get',
+            data: { id: $(this).attr("data-id") },
+            success: function (result) {
+                $(".modal-title").html("<h4>Delete Data Peminjam</h4>");
+                $(".modal-body").html(result);
+                $(".modal").modal("show");
+            }
+        });
+    });
+
+    $(".btn-detail").click(function () {
+        $.ajax({
+            url: '@Url.Action("Detail", "Peminjaman")',
+            type: 'get',
+            data: { id: $(this).attr("data-id") },
+            success: function (result) {
+                $(".modal-title").html("<h4>Details</h4>");
+                $(".modal-body").html(result);
+                $(".modal").modal("show");
+            }
+        });
+    });
+
+    //disetujui
+    $(".btn-kembalikan").click(function () {
+        $.ajax({
+            url: '@Url.Action("Pengembalian", "Peminjaman")',
+            type: 'post',
+            data: { id: $(this).attr("data-id"), app :  $(this).attr("data-value") },
+            success: function (result) {
+                alert("Buku Telah dikembalikan! ");
+                GetList();
+            }
+
+        });
+        return false;
+
+    })
+
+</script>

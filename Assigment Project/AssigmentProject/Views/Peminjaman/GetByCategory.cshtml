@@ -1,0 +1,13 @@
+﻿
+@{
+    Layout = null;
+}
+
+@model IEnumerable<ViewModel.BookViewModel>
+
+<option value=""> -- Daftar Buku -- </option> <!--Membuat pilihan viewbag karena tidak bisa return viewbag-->
+
+@foreach (var item in Model)
+{
+    <option value="@item.Id">@item.Judul</option>
+}

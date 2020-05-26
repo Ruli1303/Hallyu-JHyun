@@ -1,0 +1,69 @@
+﻿@model ViewModel.BookViewModel
+
+<font color="blue">
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-6">
+                <div class="row" style="padding-left: 10px">
+                    Category <br />
+                    <b>@Html.DisplayFor(Model => Model.CategoryId)</b>
+                </div>
+                <div class="row" style="padding-left: 10px">
+                    Judul Buku <br />
+                    <b>@Html.DisplayFor(model => model.Judul)</b>
+                </div>
+                <div class="row" style="padding-left: 10px">
+                    Penulis <br />
+                    <b>@Html.DisplayFor(model => model.Pengarang)</b>
+                </div>
+
+            </div>
+
+            <div class="col-sm-6">
+                <div class="row">
+                    Penerbit <br />
+                    <b>@Html.DisplayFor(model => model.Penerbit)</b>
+                </div>
+                <div class="row">
+                    Tahun <br />
+                    <b>@Html.DisplayFor(model => model.Tahun)</b>
+                </div>
+                <div class="row">
+                    Lokasi <br />
+                    <b>@Html.DisplayFor(model => model.LokasiRak)</b>
+                </div>
+                <div class="row">
+                    <br />
+                </div>
+
+            </div>
+
+            <div class="col-md-12">
+                <div class="row" style="padding-left: 10px">
+                    Keterangan <br />
+                    <b>@Html.DisplayFor(model => model.Deskripsi)</b>
+                </div><br />
+                <div class="row" style="padding-left: 10px">
+                    <button type="button" class="btn btn-close btn-warning">Close</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</font>
+
+<script type="text/javascript">
+    $(".btn-close").click(function () {
+        $.ajax({
+            url: this.action,
+            type: this.method,
+            data: $(this).serialize(),
+            success: function (result) {
+                $(".modal").modal("hide");
+            }
+        });
+    });
+
+</script>
+

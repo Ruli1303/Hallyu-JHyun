@@ -1,0 +1,126 @@
+﻿@model ViewModel.BookViewModel
+
+<style>
+    #Deskripsi {
+        max-width: 280px;
+    }
+</style>
+
+@using (Html.BeginForm("Edit", "Book", FormMethod.Post, new { id = "form-edit", name = "form-edit" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Category</label>
+            </div>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.CategoryId,
+               (IEnumerable<SelectListItem>)ViewBag.CategoryList, "Select Category",
+               new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Judul Buku</label>
+            </div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Judul, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Judul, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Penulis</label>
+            </div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Pengarang, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Pengarang, "", new { @class = "text-danger" }) 
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Penerbit</label>
+            </div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Penerbit, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Penerbit, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Tahun</label>
+            </div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Tahun, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Tahun, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Lokasi</label>
+            </div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LokasiRak, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LokasiRak, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Deskripsi</label>
+            </div>
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Deskripsi, 5, 75, new { htmlAttributes = new { @Class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Deskripsi, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="container-fluid">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Simpan" class="btn btn-primary" />
+                    <button type="button" class="btn btn-batal btn-warning">Batal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    $("#form-edit").submit(function () {
+        $.ajax({
+            url: this.action,
+            type: this.method,
+            data: $(this).serialize(),
+            success: function (result) {
+                if (result.success) {
+                    alert("Data berhasil diubah! ");
+                    $(".modal").modal("hide");
+                    GetList();
+                }
+                else {
+                    alert("Error! " + result.message);
+                }
+            }
+        });
+        return false;
+    });
+
+    $(".btn-batal").click(function () {
+        $(".modal").modal("hide");
+        GetList();
+    })
+</script>
+

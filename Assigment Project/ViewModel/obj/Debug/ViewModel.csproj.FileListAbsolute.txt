@@ -1,0 +1,5 @@
+D:\Assigment Project\ViewModel\bin\Debug\ViewModel.dll
+D:\Assigment Project\ViewModel\bin\Debug\ViewModel.pdb
+D:\Assigment Project\ViewModel\obj\Debug\ViewModel.csprojAssemblyReference.cache
+D:\Assigment Project\ViewModel\obj\Debug\ViewModel.dll
+D:\Assigment Project\ViewModel\obj\Debug\ViewModel.pdb

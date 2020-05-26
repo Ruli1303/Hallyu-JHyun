@@ -1,0 +1,125 @@
+﻿@model ViewModel.PeminjamanViewModel
+
+
+@using (Html.BeginForm("Create", "Peminjaman", FormMethod.Post, new { id = "form-create", name = "form-create" })) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>NPM</label>
+            </div>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.BiodataId,
+               (IEnumerable<SelectListItem>)ViewBag.BiodataList, "Pilih",
+               new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.BiodataId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Category</label>
+            </div>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.CategoryId,
+               (IEnumerable<SelectListItem>)ViewBag.CategoryList, "Pilih",
+               new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Judul</label>
+            </div>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.BookId,
+               (IEnumerable<SelectListItem>)ViewBag.BookList, "Pilih",
+               new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.BookId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Tanggal Peminjaman</label>
+            </div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TanggalPinjam, new { htmlAttributes = new { @class = "form-control", @Type = "date" } })
+                @Html.ValidationMessageFor(model => model.TanggalPinjam, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Tanggal Pengembalian</label>
+            </div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TanggalKembali, new { htmlAttributes = new { @class = "form-control", @Type = "date" } })
+                @Html.ValidationMessageFor(model => model.TanggalKembali, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Petugas</label>
+            </div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Pegawai, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Pegawai, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="container-fluid">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="button" class="btn btn-batal btn-warning">Batal</button>
+                    <input type="submit" value="Simpan" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    $("#CategoryId").change(function () { 
+        //alert('aa')
+        $.ajax({ // memanggil controller
+            url: '@Url.Action("GetByCategory", "Peminjaman")',
+            type: 'get',
+            data: { categoryId: $(this).val() },
+            success: function (result) {
+                $("#BookId").html(result);
+            }
+        });
+    });
+
+
+    $("#form-create").submit(function () {
+        $.ajax({
+            url: this.action,
+            type: this.method,
+            data: $(this).serialize(),
+            success: function (result) {
+                if (result.success) {
+                    alert("Data berhasil disimpan !");
+                    $(".modal").modal("hide");
+                    GetList();
+                } else {
+                    alert("Error! " + result.message);
+                }
+            }
+        });
+        return false;
+    });
+
+    $(".btn-batal").click(function () {
+        $(".modal").modal("hide");
+        GetList();
+    })
+
+</script>
