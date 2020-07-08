@@ -1,0 +1,131 @@
+﻿@model ViewModel.PesertaViewModel
+
+@{
+    ViewBag.Title = "Pendaftaran";
+}
+
+@Scripts.Render("~/bundles/jqueryval")
+@using (Html.BeginForm("Create", "Peserta", FormMethod.Post, new { id = "form-create", name = "form-create" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <hr />
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>
+                    Nama *
+                </label>
+            </div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nama, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.nama, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>
+                    Nomor Handphone *
+                </label>
+            </div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.noTelpon, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.noTelpon, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>
+                    Email
+                </label>
+            </div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>
+                    Tanggal Lahir *
+                </label>
+            </div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.tanggalLahir, new { htmlAttributes = new { @class = "form-control", @Type = "date" } })
+                @Html.ValidationMessageFor(model => model.tanggalLahir, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>
+                    Alamat *
+                </label>
+            </div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.alamat, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.alamat, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>
+                    Jurusan Kuliah yang dibidangi ?
+                </label>
+            </div>
+            <div class="col-md-10">
+                <label> @Html.RadioButton("jurusan", "IT", false)IT </label>
+                <label> @Html.RadioButton("jurusan", "Non IT", false) NON IT </label>
+                @Html.ValidationMessageFor(model => model.jurusan, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>
+                    Pertanyaan
+                </label>
+            </div>
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.pertanyaan, 5, 78, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.pertanyaan, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="container-fluid">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Kirim" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    $("#form-create").submit(function () {
+        $.ajax({
+            url: this.action,
+            type: this.method,
+            data: $(this).serialize(),
+            success: function (result) {
+                if (result.success) {
+                    alert("Data berhasil disimpan !");
+                    $(".modal").modal("hide");
+                    window.location.reload(); 
+                } else {
+                    alert("Error! " + result.message);
+                }
+            }
+        });
+        return false;
+    });
+
+
+</script>
+

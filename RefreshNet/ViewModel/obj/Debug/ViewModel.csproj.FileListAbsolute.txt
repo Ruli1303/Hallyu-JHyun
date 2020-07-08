@@ -1,0 +1,5 @@
+D:\RefreshNet\ViewModel\bin\Debug\ViewModel.dll
+D:\RefreshNet\ViewModel\bin\Debug\ViewModel.pdb
+D:\RefreshNet\ViewModel\obj\Debug\ViewModel.csprojAssemblyReference.cache
+D:\RefreshNet\ViewModel\obj\Debug\ViewModel.dll
+D:\RefreshNet\ViewModel\obj\Debug\ViewModel.pdb

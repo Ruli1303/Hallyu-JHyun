@@ -1,0 +1,120 @@
+﻿@model ViewModel.PesertaViewModel
+
+@using (Html.BeginForm("Edit", "Peserta", FormMethod.Post, new { id = "form-edit", name = "form-edit" } ))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>PesertaViewModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id)
+
+        <div class="form-group">
+            <div class="col-md">
+                Nama*
+            </div>
+            <div class="col-md">
+                @Html.EditorFor(model => model.nama, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.nama, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md">
+                Nomor Handphone*
+            </div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.noTelpon, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.noTelpon, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md">
+                Email*
+            </div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md">
+                Tanggal Lahir*
+            </div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.tanggalLahir, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.tanggalLahir, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md">
+                Alamat*
+            </div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.alamat, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.alamat, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md">
+                Jurusan Kuliah yang dibidangi ? Handphone*
+            </div>
+            
+            <div class="col-md-10">
+                <label> @Html.RadioButton("jurusan", "IT", Model.jurusan)IT </label> <br />
+                <label> @Html.RadioButton("jurusan", "Non IT", Model.jurusan) NON IT </label>
+                @Html.ValidationMessageFor(model => model.jurusan, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md">
+                Pertanyaan
+            </div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.pertanyaan, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.pertanyaan, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="container-fluid">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="button" class="btn btn-batal btn-warning">Batal</button>
+                    <input type="submit" value="Edit" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    $("#form-edit").submit(function () {
+        $.ajax({
+            url: this.action,
+            type: this.method,
+            data: $(this).serialize(),
+            success: function (result) {
+                if (result.success) {
+                    alert("Data berhasil diubah! ");
+                    $(".modal").modal("hide");
+                    GetList();
+                }
+                else {
+                    alert("Error! " + result.message);
+                }
+            }
+        });
+        return false;
+    });
+
+    $(".btn-batal").click(function () {
+        $(".modal").modal("hide");
+        GetList();
+    })
+</script>

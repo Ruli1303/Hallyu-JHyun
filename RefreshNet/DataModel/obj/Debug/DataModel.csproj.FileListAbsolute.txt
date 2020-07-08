@@ -1,0 +1,11 @@
+D:\RefreshNet\DataModel\bin\Debug\DataModel.dll.config
+D:\RefreshNet\DataModel\bin\Debug\DataModel.dll
+D:\RefreshNet\DataModel\bin\Debug\DataModel.pdb
+D:\RefreshNet\DataModel\bin\Debug\EntityFramework.dll
+D:\RefreshNet\DataModel\bin\Debug\EntityFramework.SqlServer.dll
+D:\RefreshNet\DataModel\bin\Debug\EntityFramework.xml
+D:\RefreshNet\DataModel\bin\Debug\EntityFramework.SqlServer.xml
+D:\RefreshNet\DataModel\obj\Debug\DataModel.csprojAssemblyReference.cache
+D:\RefreshNet\DataModel\obj\Debug\DataModel.csproj.CopyComplete
+D:\RefreshNet\DataModel\obj\Debug\DataModel.dll
+D:\RefreshNet\DataModel\obj\Debug\DataModel.pdb

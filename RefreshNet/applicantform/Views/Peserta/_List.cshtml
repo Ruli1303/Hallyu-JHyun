@@ -1,0 +1,87 @@
+﻿@model IEnumerable<ViewModel.PesertaViewModel>
+
+<table class="table">
+    <tr>
+        <th>
+            Nama
+        </th>
+        <th>
+            Nomor Handphone
+        </th>
+        <th>
+            Jurusan
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nama)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.noTelpon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.jurusan)
+        </td>
+        <td class="garis">
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownmore"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    More
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownmore">
+                    <li><a class="btn-edit" data-id="@item.id">Ubah</a></li>
+                    <li><a class="btn-delete" data-id="@item.id">Hapus</a></li>
+                    <li><a class="btn-detail" data-id="@item.id">Detail</a></li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+}
+
+</table>
+
+<script type="text/javascript">
+
+    $(".btn-edit").click(function () {
+        $.ajax({
+            url: '@Url.Action("Edit", "Peserta")',
+            type: 'get',
+            data: { id: $(this).attr("data-id") },
+            success: function (result) {
+                $(".modal-title").html("<h4>Edit Daftar Peserta</h4>");
+                $(".modal-body").html(result);
+                $(".modal").modal("show");
+            }
+        });
+    });
+
+    $(".btn-delete").click(function () {
+        $.ajax({
+            url: '@Url.Action("Delete", "Peserta")',
+            type: 'get',
+            data: { id: $(this).attr("data-id") },
+            success: function (result) {
+                $(".modal-title").html("<h4>Delete Daftar Peserta</h4>");
+                $(".modal-body").html(result);
+                $(".modal").modal("show");
+            }
+        });
+    });
+
+    $(".btn-detail").click(function () {
+        $.ajax({
+            url: '@Url.Action("Detail", "Peserta")',
+            type: 'get',
+            data: { id: $(this).attr("data-id") },
+            success: function (result) {
+                $(".modal-title").html("<h4>Details</h4>");
+                $(".modal-body").html(result);
+                $(".modal").modal("show");
+            }
+        });
+    });
+</script>
